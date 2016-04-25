@@ -1,2 +1,2 @@
 github "CocoaLumberjack/CocoaLumberjack"
-github "tonymillion/Reachability" "master"
+github "nicklockwood/FXReachability" ~> 1.3

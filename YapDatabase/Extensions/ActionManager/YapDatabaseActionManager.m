@@ -205,19 +205,18 @@
 **/
 - (void)didRegisterExtension
 {
-	Reachability *reachability = self.reachability;
+	FXReachability *reachability = self.reachability;
 	if (reachability == nil)
 	{
-		reachability = [Reachability reachabilityForInternetConnection];
+		reachability = [FXReachability sharedInstance];
 		self.reachability = reachability;
 	}
 	
-	[reachability startNotifier]; // safe to be called multiple times
 	self.hasInternet = reachability.isReachable;
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self
 	                                         selector:@selector(reachabilityChanged:)
-	                                             name:kReachabilityChangedNotification
+	                                             name:FXReachabilityStatusDidChangeNotification
 	                                           object:reachability];
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self
@@ -256,7 +255,11 @@
 
 - (void)reachabilityChanged:(NSNotification *)notification
 {
-	Reachability *reachability = self.reachability;
+    FXReachability *reachability = notification.object;
+    if (![reachability isKindOfClass:[FXReachability class]]) {
+        reachability = self.reachability;
+    }
+
 	if (reachability)
 		self.hasInternet = reachability.isReachable;
 	else

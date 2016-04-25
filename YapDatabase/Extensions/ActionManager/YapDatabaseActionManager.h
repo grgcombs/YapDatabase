@@ -6,7 +6,7 @@
 #import "YapDatabaseActionManagerTransaction.h"
 #import "YapDatabaseView.h"
 
-#import <Reachability/Reachability.h>
+#import <FXReachability/FXReachability.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -40,9 +40,9 @@ NS_ASSUME_NONNULL_BEGIN
  * This is to support the YapActionItem.requiresInternet property.
  * 
  * If an instance is not assigned, then one will be automatically created (after registration)
- * via [Reachability reachabilityForInternetConnection].
+ * via [FXReachability sharedInstance].
 **/
-@property (atomic, strong, readwrite, nullable) Reachability *reachability;
+@property (atomic, strong, readwrite, nullable) FXReachability *reachability;
 
 @end
 
